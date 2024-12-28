@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     unzip \
     curl \
+    bat \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -64,6 +65,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+RUN git clone git@github.com:junegunn/fzf-git.sh.git $HOME/fzf-git.sh
 
 # Copy Neovim binary from the first stage
 COPY --from=neovim-source /usr/local/bin/nvim /usr/local/bin/nvim

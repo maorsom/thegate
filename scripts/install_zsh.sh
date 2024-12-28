@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 source $SCRIPT_DIR/colors.sh
 
 ZSH_PATH=$(command -v zsh)

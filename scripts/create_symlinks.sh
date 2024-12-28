@@ -50,4 +50,4 @@ SOURCE_DIR="$SCRIPT_DIR/../symlinks" # The directory containing the source files
 create_symlink "$SOURCE_DIR/.zshrc" "$HOME/.zshrc"
 create_symlink "$SOURCE_DIR/.tmux.conf" "$HOME/.tmux.conf"
 
-echo "${GREEN}Symlinks created.${NC}"
+echo -e "${GREEN}Symlinks created.${NC}"
