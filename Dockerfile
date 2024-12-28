@@ -47,25 +47,6 @@ FROM ubuntu:20.04 AS base
 # Prevent interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install essential packages for development
-RUN apt-get update && apt-get install -y \
-    zsh \
-    git \
-    curl \
-    tmux \
-    sudo \
-    wget \
-    fd-find \
-    make \
-    cmake \
-    g++ \
-    fzf \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-RUN git clone https://github.com/junegunn/fzf-git.sh.git $HOME/fzf-git.sh
-
 # Copy Neovim binary from the first stage
 COPY --from=neovim-source /usr/local/bin/nvim /usr/local/bin/nvim
 COPY --from=neovim-source /usr/local/share/nvim /usr/local/share/nvim
@@ -74,17 +55,7 @@ COPY --from=eza /eza /usr/local/bin/eza
 # Stage 3: Clone dotfiles and bootstrap
 FROM base AS dotfiles-setup
 
+RUN apt update && apt install -y git
+
 # Clone the dotfiles repository as a bare repo
 RUN git clone https://github.com/maorsom/thegate.git /opt/thegate
-
-# Run bootstrap script from the dotfiles repository if it exists
-RUN /opt/thegate/bootstrap.sh
-
-# Stage 4: Final development environment
-FROM dotfiles-setup
-
-# Set Zsh as default shell
-RUN chsh -s $(which zsh)
-
-# Start Zsh by default
-CMD ["zsh"]
