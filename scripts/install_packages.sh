@@ -19,21 +19,19 @@ function error() {
 }
 
 # Update and install required packages
-echo -e "${YELLOW}Updating package lists and installing required packages...${NC}"
-sudo apt-get update && sudo apt-get install -y \
+echo -e "${YELLOW}Updating package lists and installing required packages...${NC}" apt-get update && apt-get install -y \
     zsh \
     git \
     curl \
     tmux \
-    sudo \
     wget \
     fd-find \
     make \
     cmake \
     g++ \
     fzf &&
-    sudo apt-get clean &&
-    sudo rm -rf /var/lib/apt/lists/* &&
+    apt-get clean &&
+    rm -rf /var/lib/apt/lists/* &&
     success "Packages installed successfully!"
 
 # Install zoxide
